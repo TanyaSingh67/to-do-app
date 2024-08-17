@@ -23,21 +23,22 @@ class _homepageState extends State<homepage> {
         backgroundColor: tdBgcolor,
         elevation: 0,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Icon(
               Icons.menu,
               color: tdblack,
               size: 30,
             ),
-            Expanded(
-              child: Container(
+           
+               Container(
                 height: 40,
                 width: 40,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.asset("images/name.png "),
+                  child: Image.network("https://th.bing.com/th/id/OIP.y-nGyqT5AwES8oqp344z4gHaHa?rs=1&pid=ImgDetMain"),
                 ),
-              ),
+              
             ),
           ],
         ),
