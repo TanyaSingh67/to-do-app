@@ -12,7 +12,7 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   get todoslist => Todo.todolist();
-  
+  final _todocontroller=TextEditingController();
   
 
   @override
@@ -80,7 +80,7 @@ class _homepageState extends State<homepage> {
               ),
               for (Todo todoo in todoslist) ToDoItems(todo: todoo,
               ontodochanged: _handleTodoChange,
-              ondeleteitem: () {},),
+              ondeleteitem: deleteTodoitem,),
             ],
           ),
         ),
@@ -111,6 +111,7 @@ bottomNavigationBar: BottomAppBar(
                             ),
                           ]),
                           child:TextFormField(
+                            controller: _todocontroller,
                           decoration:const  InputDecoration(hintText: "Add a new ToDo Item",
                           border: InputBorder.none,
                           hintStyle: TextStyle(fontSize: 16)),
@@ -119,7 +120,9 @@ bottomNavigationBar: BottomAppBar(
               Container(
                 margin:const EdgeInsets.only(top: 10, right: 10),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    addtodoitem(_todocontroller.text);
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: tdblue,
                       minimumSize: const Size(60, 60),
@@ -143,4 +146,17 @@ bottomNavigationBar: BottomAppBar(
    
 
   }
+  void deleteTodoitem(String id ){
+    setState(() {
+      todoslist.removewhere((item) => item.id==id);
+    });
+  }
+   
+   void addtodoitem(String todo){
+   setState(() {
+      todoslist.add(Todo(id: DateTime.now().millisecondsSinceEpoch.toString(), todotext: todo));
+   });
+    _todocontroller.clear();
+   }
+ 
 }
